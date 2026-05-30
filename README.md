@@ -1,6 +1,6 @@
 <div align="center">
   <h1>💰 AI Wealth Advisor</h1>
-  <p><strong>A Multi-Agent Financial Planning System — Powered by OpenRouter & Ollama</strong></p>
+  <p><strong>A Multi-Agent Financial Planning System — Powered by OpenRouter</strong></p>
 </div>
 
 ---
@@ -30,13 +30,12 @@ Unlike simple chatbots, AI Wealth Advisor routes tasks across specialized sub-ag
 
 ### 1. Prerequisites
 - **Python 3.8+**
-- **Ollama** (for local AI inference fallback)
-- *(Optional)* **OpenRouter API Key** for premium models.
+- **OpenRouter API Key**
 
 ### 2. Configure Environment Variables
 Create a `.env` file in the root directory:
 ```env
-# Use your OpenRouter Key (Primary) or leave blank to fallback to Ollama
+# Use your OpenRouter API Key
 OPENROUTER_API_KEY=your_key_here
 MODEL_NAME=qwen2.5:7b
 ```
@@ -75,7 +74,7 @@ Interactive API documentation (Swagger UI) is available at:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET`  | `/api/health` | Check if the LLM provider (OpenRouter/Ollama) and Agents are ready. |
+| `GET`  | `/api/health` | Check if the LLM provider (OpenRouter) and Agents are ready. |
 | `GET`  | `/api/market` | Instant live snapshot of global & Indian market benchmarks. |
 | `POST` | `/api/analyze/stream` | **Real-time Multi-Agent Analysis** featuring live Server-Sent Events (SSE) streaming. |
 
