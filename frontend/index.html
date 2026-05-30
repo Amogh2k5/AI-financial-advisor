@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Wealth Advisor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="background-effects">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Top Bar -->
+    <header class="top-bar glass">
+        <div class="logo">
+            <span class="logo-icon">💰</span>
+            <h1>AI Wealth Advisor</h1>
+        </div>
+        <div class="ticker-container">
+            <div id="market-ticker" class="ticker">Fetching live market data...</div>
+        </div>
+        <button id="toggle-activity-btn" class="btn-secondary">
+            <span>Agent Activity</span>
+            <span class="activity-indicator" id="activity-indicator"></span>
+        </button>
+    </header>
+
+    <div class="dashboard-wrapper">
+        <!-- Left Panel: Form -->
+        <aside class="left-panel glass">
+            <h2>Client Profile</h2>
+            <form id="advisor-form" style="padding-bottom: 1rem;">
+                <div class="input-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required placeholder="e.g. John Doe">
+                </div>
+                <div class="input-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" required placeholder="e.g. 25" min="18" max="100">
+                </div>
+                <div class="input-group">
+                    <label for="monthly_budget">Monthly Investible Amount (₹)</label>
+                    <input type="number" id="monthly_budget" required placeholder="e.g. 50000" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="risk_tolerance">Risk Tolerance</label>
+                    <select id="risk_tolerance" required>
+                        <option value="low">Low - Safe investments</option>
+                        <option value="medium" selected>Medium - Balanced approach</option>
+                        <option value="high">High - Aggressive growth</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="goals">Financial Goals</label>
+                    <input type="text" id="goals" required placeholder="e.g. Buy a house in 5 years" />
+                </div>
+                <button type="submit" id="submit-btn" class="btn-primary">
+                    <span class="btn-text">Generate Strategy</span>
+                    <div class="spinner hidden" id="loading-spinner"></div>
+                </button>
+            </form>
+        </aside>
+
+        <!-- Main Area: Recommendation & Charts -->
+        <main class="main-area glass">
+            <div class="main-header">
+                <div class="header-title-group">
+                    <h2>Wealth Strategy</h2>
+                    <div id="status-badge" class="badge idle">Idle</div>
+                </div>
+                <div class="strategy-controls">
+                    <button id="toggle-charts-btn" class="pill-btn hidden">Charts ↗</button>
+                    <button id="export-pdf-btn" class="pill-btn hidden">Export PDF ↓</button>
+                </div>
+            </div>
+            
+            <div class="content-scroll">
+                <div id="recommendation-content" class="markdown-body">
+                    <div class="empty-state">
+                        <span class="empty-icon">📈</span>
+                        <p>Enter your profile to get a personalized wealth strategy.</p>
+                    </div>
+                </div>
+
+                <!-- Charts Section (Hidden until toggled) -->
+                <div id="charts-container" class="charts-section hidden">
+                    <div class="chart-card glass">
+                        <h3>Where your money goes (Asset Allocation)</h3>
+                        <p class="chart-subtitle">This pie chart shows how your total investment is distributed across different asset classes.</p>
+                        <div class="canvas-container">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card glass">
+                        <h3>Investment Growth: Performance (%)</h3>
+                        <p class="chart-subtitle">This graph compares how your suggested investments grew or fell over the last 30 days. Higher lines mean better performance.</p>
+                        <div class="canvas-container">
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    <!-- Right Panel: Agent Activity Feed (Drawer) -->
+    <aside id="activity-drawer" class="activity-drawer glass">
+        <div class="drawer-header">
+            <h2>Agent Activity</h2>
+            <button id="close-drawer-btn" class="icon-btn">✕</button>
+        </div>
+        <ul id="activity-feed" class="feed content-scroll">
+            <li class="feed-item thinking">Waiting for input...</li>
+        </ul>
+    </aside>
+
+    <script src="script.js"></script>
+</body>
+</html>
